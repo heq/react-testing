@@ -8,13 +8,14 @@ module.exports = {
         var requestUrl = `${DIGITRANSIT_URL}&text=${encodedLocation}`
 
         return axios.get(requestUrl).then(function (response) {
-            if (response.data.cod && response.data.message) {
-                throw new Error(response.data.message);
+            console.log('API response data', response.data);
+            if (response.data.features.length < 1) {
+                throw new Error('No result');
             } else {
                 return response.data.bbox;
             }
         }, function (response) {
-            throw new Error(response.data.message);
+            throw new Error('Error fetching coordinates.');
         });
     }
 };

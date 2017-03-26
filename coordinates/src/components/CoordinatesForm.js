@@ -13,8 +13,8 @@ var CoordinatesForm = React.createClass({
     render: function() {
         return (
             <form onSubmit={this.onFormSubmit}>
-                <input type="text" placeholder="Enter city name" ref="locationInput"/>
-                <button type="submit">Get Coordinates</button>
+                <input type="search" placeholder="Enter city name" ref="locationInput"/>
+                <button className="button expanded" type="submit">Get Coordinates</button>
             </form>
         );
     }

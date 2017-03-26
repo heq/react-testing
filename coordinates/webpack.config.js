@@ -1,7 +1,21 @@
+var webpack = require('webpack');
+
 module.exports = {
     entry: [
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/foundation.min.js',
         './src/app.js',
         './src/index.html'
+    ],
+    // to have variables available on the entry files(?)
+    externals: {
+        jquery: 'jQuery',
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
     ],
     output: {
         path: __dirname + '/dist',
@@ -16,9 +30,11 @@ module.exports = {
             Coordinates: 'src/components/Coordinates.js',
             CoordinatesForm: 'src/components/CoordinatesForm.js',
             CoordinatesMessage: 'src/components/CoordinatesMessage.js',
+            ErrorModal: 'src/components/ErrorModal.js',
             About: 'src/components/About.js',
             Examples: 'src/components/Examples.js',
             digitransit: 'src/api/digitransit.js',
+            applicationStyles: 'src/styles/app.scss',
         },
         extensions: ['', '.js', '.jsx']
     },

@@ -2,8 +2,8 @@ var React = require('react');
 
 var CoordinatesMessage = ({location, latlong}) => {
     return (
-        <h3>
-            {location} is in [{latlong[0]}, {latlong[1]}].
+        <h3>{location}, coordinates are<br/>
+        <b>[{latlong[0]}, {latlong[1]}]</b>
         </h3>
     );
 };
