@@ -30,6 +30,7 @@ module.exports = {
             Timer: 'src/components/Timer.js',
             Countdown: 'src/components/Countdown.js',
             Clock: 'src/components/Clock.js',
+            InputForm: 'src/components/InputForm.js',
             applicationStyles: 'src/styles/app.scss',
         },
         extensions: ['', '.js', '.jsx']
@@ -50,5 +51,6 @@ module.exports = {
             }
         ]
     },
-    devtool: 'cheap-module-eval-source-map'
+    devtool: 'cheap-source-map'
+    //devtool: 'cheap-module-eval-source-map'
 };
