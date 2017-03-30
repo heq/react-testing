@@ -29,6 +29,7 @@ module.exports = {
             Navigation: 'src/components/Navigation.js',
             Timer: 'src/components/Timer.js',
             Countdown: 'src/components/Countdown.js',
+            Controls: 'src/components/Controls.js',
             Clock: 'src/components/Clock.js',
             InputForm: 'src/components/InputForm.js',
             applicationStyles: 'src/styles/app.scss',

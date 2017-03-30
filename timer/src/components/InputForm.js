@@ -1,7 +1,7 @@
 var React = require('react');
 
 var InputForm = React.createClass({
-    onFormSubmit: function(e) {
+    onSubmit: function(e) {
         e.preventDefault();
 
         var inputString = this.refs.secondsInput.value;
@@ -10,12 +10,12 @@ var InputForm = React.createClass({
         if (/^\d+$/g.test(inputString)) {
             var inputNumber = parseInt(inputString, 10);
             if (inputNumber <= 0) return;
-            this.props.submitFunction(inputNumber);
+            this.props.onSetCountdown(inputNumber);
         }
     },
     render: function() {
         return (
-            <form ref="form" onSubmit={this.onFormSubmit}>
+            <form ref="form" onSubmit={this.onSubmit}>
                 <input ref="secondsInput" type="search" placeholder="Enter seconds" />
                 <button className="button expanded" type="submit">Set countdown</button>
             </form>

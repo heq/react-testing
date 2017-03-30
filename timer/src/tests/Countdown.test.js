@@ -12,12 +12,12 @@ describe('Countdown', () => {
     });
 
     describe('.handleSetCountdown()', () => {
-        it('should set state to "started" and countdown', (done) => {
+        it('should set state to "STARTED" and countdown', (done) => {
             var countdown = TestUtils.renderIntoDocument(<Countdown />);
             countdown.handleSetCountdown(10);
 
             expect(countdown.state.count).toBe(10);
-            expect(countdown.state.countdownStatus).toBe('started');
+            expect(countdown.state.countdownStatus).toBe('STARTED');
 
             setTimeout(() => {
                 expect(countdown.state.count).toBe(9);

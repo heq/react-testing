@@ -1,18 +1,13 @@
 var React = require('react');
 var Clock = require('Clock');
+var Controls = require('Controls');
 var InputForm = require('InputForm');
-
-var STATE = {
-    STOPPED: 'stopped',
-    STARTED: 'started',
-    PAUSED: 'paused'
-}
 
 var Countdown = React.createClass({
     getInitialState: function () {
         return {
             count: 0,
-            countdownStatus: STATE.STOPPED
+            countdownStatus: "STOPPED"
         };
     },
     componentDidUpdate: function (prevProps, prevState) {
@@ -20,8 +15,16 @@ var Countdown = React.createClass({
 
         if (currentStatus !== prevState.countdownStatus) {
             switch (currentStatus) {
-                case STATE.STARTED:
+                case "STARTED":
                     this.startTimer();
+                    break;
+                case "STOPPED":
+                    this.setState({
+                        count: 0
+                    });
+                case "PAUSED":
+                    clearInterval(this.timer);
+                    this.timer = undefined;
                     break;
             }
         }
@@ -39,15 +42,29 @@ var Countdown = React.createClass({
     handleSetCountdown: function (seconds) {
         this.setState({
             count: seconds,
-            countdownStatus: STATE.STARTED
+            countdownStatus: "STARTED"
+        });
+    },
+    handleStatusChange: function (newStatus) {
+        this.setState({
+            countdownStatus: newStatus
         });
     },
     render: function() {
-        var {count} = this.state;
+        var {count, countdownStatus} = this.state;
+
+        var renderControlArea = () => {
+            if (countdownStatus !== 'STOPPED') {
+                return <Controls countdownStatus={countdownStatus} onStatusChange={this.handleStatusChange} />
+            } else {
+                return <InputForm onSetCountdown={this.handleSetCountdown} />
+            }
+        }
+
         return (
             <div>
-                <Clock totalSeconds={count}/>
-                <InputForm submitFunction={this.handleSetCountdown}/>
+                <Clock totalSeconds={count} />
+                {renderControlArea()}
             </div>
         );
     }
