@@ -14,7 +14,7 @@ describe('InputForm', () => {
     describe('.onSetCountdown()', () => {
         it('should be called when input is valid', () => {
             var spy = expect.createSpy();
-            var countdownForm = TestUtils.renderIntoDocument(<InputForm submitFunction={spy}/>);
+            var countdownForm = TestUtils.renderIntoDocument(<InputForm onSetCountdown={spy}/>);
             var $el = $(ReactDOM.findDOMNode(countdownForm));
 
             countdownForm.refs.secondsInput.value = '109';
@@ -24,7 +24,7 @@ describe('InputForm', () => {
         });
         it('should not be called when input is invalid', () => {
             var spy = expect.createSpy();
-            var countdownForm = TestUtils.renderIntoDocument(<InputForm submitFunction={spy}/>);
+            var countdownForm = TestUtils.renderIntoDocument(<InputForm onSetCountdown={spy}/>);
             var $el = $(ReactDOM.findDOMNode(countdownForm));
 
             countdownForm.refs.secondsInput.value = '109asd';
