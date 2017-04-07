@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jQuery');
 
 module.exports = {
     setTodos: function (todos) {
@@ -18,5 +18,36 @@ module.exports = {
         }
 
         return $.isArray(todos) ? todos : [];
+    },
+    filterTodos: function (todos, showCompleted, searchText) {
+        var filteredTodos = todos;
+
+        // filter by completed status
+        filteredTodos = filteredTodos.filter((todoItem) => {
+            return !todoItem.completed || showCompleted;
+        });
+
+        // filter by searchText
+        if (searchText.length > 0) {
+            filteredTodos = filteredTodos.filter((todoItem) => {
+                var text = todoItem.text.toLowerCase();
+                var string = searchText.toLowerCase();
+
+                return (text.indexOf(string) >= 0);
+            });
+        }
+
+        // sort by completed status
+        filteredTodos.sort((a, b) => {
+            if (!a.completed && b.completed) {
+                return -1;
+            } else if (a.completed && !b.completed) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        return filteredTodos;
     }
 };
