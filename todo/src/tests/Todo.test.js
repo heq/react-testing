@@ -21,7 +21,10 @@ describe('Todo', () => {
             });
             todo.addItem(todoText);
 
-            expect(todo.state.todos[0].text).toBe(todoText);
+            var todoItem = todo.state.todos[0];
+
+            expect(todoItem.text).toBe(todoText);
+            expect(todoItem.createdTimestamp).toBeA('number');
         });
 
         it('should toggle completed value when handleToggle is called', () =>  {
@@ -29,16 +32,43 @@ describe('Todo', () => {
             var todoItem =  {
                 id: itemId,
                 text: 'test',
-                completed: false
+                completed: false,
+                createdTimestamp: 0,
+                completedTimestamp: undefined
             };
             var todo = TestUtils.renderIntoDocument(<Todo />);
             todo.setState({
                 todos: [todoItem]
             });
+            var todoItem = todo.state.todos[0];
 
-            expect(todo.state.todos[0].completed).toBe(false);
+            expect(todoItem.completed).toBe(false);
             todo.handleListItemToggle(itemId);
-            expect(todo.state.todos[0].completed).toBe(true);
+
+            expect(todoItem.completed).toBe(true);
+            expect(todoItem.completedTimestamp).toBeA('number');
+        });
+
+        it('should set completedTimestamp as undefined when completed toggled back to uncomplited', () =>  {
+            var itemId = 13;
+            var todoItem =  {
+                id: itemId,
+                text: 'test',
+                completed: true,
+                createdTimestamp: 0,
+                completedTimestamp: 1337
+            };
+            var todo = TestUtils.renderIntoDocument(<Todo />);
+            todo.setState({
+                todos: [todoItem]
+            });
+            var todoItem = todo.state.todos[0];
+
+            expect(todoItem.completed).toBe(true);
+            todo.handleListItemToggle(itemId);
+
+            expect(todoItem.completed).toBe(false);
+            expect(todoItem.completedTimestamp).toBeA('undefined');
         });
     });
 });

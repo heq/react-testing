@@ -1,5 +1,6 @@
 var React = require('react');
 var uuid = require('node-uuid');
+var moment = require('moment');
 
 var List = require('List');
 var AddTodo = require('AddTodo');
@@ -21,7 +22,9 @@ var Todo = React.createClass({
         var newItem = {
             id: uuid(),
             text: text,
-            completed: false
+            completed: false,
+            createdTimestamp: moment().unix(),
+            completedTimestamp: undefined
         };
 
         this.setState({
@@ -35,6 +38,12 @@ var Todo = React.createClass({
         var updatedTodos = this.state.todos.map((todo) => {
             if (todo.id === id) {
                 todo.completed = !todo.completed;
+
+                if (todo.completed) {
+                    todo.completedTimestamp = moment().unix();
+                } else {
+                    todo.completedTimestamp = undefined;
+                }
             }
 
             return todo;
@@ -56,10 +65,16 @@ var Todo = React.createClass({
 
         return (
             <div>
-                <h1>Todo</h1>
-                <Search onSearch={this.handleSearch} />
-                <List listItems={filteredTodos} onToggle={this.handleListItemToggle} />
-                <AddTodo handleAddItem={this.addItem} />
+                <h1 className="page-title">Todo</h1>
+                <div className="row">
+                    <div className="column small-centered small-11 medium-6 large-5">
+                        <div className="container">
+                            <Search onSearch={this.handleSearch} />
+                            <List listItems={filteredTodos} onToggle={this.handleListItemToggle} />
+                            <AddTodo handleAddItem={this.addItem} />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

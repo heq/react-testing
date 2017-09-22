@@ -1,1 +1,65 @@
 @import "variables";
+
+.page-title {
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.container {
+    margin: 0 0 2rem;
+    border: 1px solid $light-grey-border;
+    border-radius: 2px;
+    background-color: $light-grey;
+}
+.container__header {
+    border-bottom: 1px solid $light-grey-border;
+    padding: 1rem;
+}
+.container__header label {
+    cursor: pointer;
+    font-size: 1rem;
+}
+.container__header > :last-child {
+    display: flex;
+    align-items: center
+}
+.container__footer {
+    padding: 1rem 1rem 0 1rem;
+    border-top: 1px solid $light-grey-border;
+}
+.container__message {
+    margin: 2rem auto;
+    text-align: center;
+    color: $text-color;
+}
+
+.list-item {
+    padding: 1rem;
+    transition: background 0.3s ease;
+    cursor: pointer;
+
+    p,
+    input {
+        margin: 0;
+    }
+    input {
+        display: none;
+    }
+}
+.list-item > :first-child {
+    margin-right: 1rem;
+}
+.list-item:hover {
+    background-color: $light-grey-2;
+}
+.main-text,
+.sub-text {
+    color: $grey;
+}
+.is-completed {
+    .main-text,
+    .sub-text {
+        color: $medium-grey;
+        text-decoration: line-through;
+    }
+}

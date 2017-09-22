@@ -11,7 +11,7 @@ var Search = React.createClass({
         var {} = this.props;
 
         return (
-            <div>
+            <div className="container__header">
                 <div>
                     <input ref="searchText" onChange={this.handleSeach} type="text" placeholder="Search todos" />
                 </div>
